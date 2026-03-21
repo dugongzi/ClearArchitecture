@@ -1,7 +1,7 @@
 package main
 
 import (
-	"ClearArchitecture/core/registry"
+	"ClearArchitecture/core/registry/commands"
 	"fmt"
 	"os"
 )
@@ -13,7 +13,7 @@ func main() {
 	}
 
 	input := os.Args[1]
-	for _, cmd := range registry.Commands {
+	for _, cmd := range commands.Commands {
 		if cmd.Name == input {
 			if err := cmd.Run(os.Args[2:]); err != nil {
 				fmt.Println("执行失败:", err)

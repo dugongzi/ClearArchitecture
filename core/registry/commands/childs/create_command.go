@@ -55,23 +55,6 @@ func createFeature(args []string) error {
 	return nil
 }
 
-func resolveFeaturePaths(args []string) ([]string, error) {
-	if len(args) <= 2 || args[2] == "" {
-		return allFeaturePaths, nil
-	}
-
-	switch args[2] {
-	case "data":
-		return dataFeaturePaths, nil
-	case "domain":
-		return domainFeaturePaths, nil
-	case "presentation":
-		return presentationFeaturePaths, nil
-	default:
-		return nil, fmt.Errorf("未知模块类型: %s", args[2])
-	}
-}
-
 func createModel(args []string) error {
 	if len(args) < 3 {
 		return fmt.Errorf("缺少参数，示例: create -model featureName modelName [-sync]")
@@ -89,6 +72,23 @@ func createModel(args []string) error {
 	}
 
 	return utils.CreateDomainModel(modelPath, modelName, modelClassName)
+}
+
+func resolveFeaturePaths(args []string) ([]string, error) {
+	if len(args) <= 2 || args[2] == "" {
+		return allFeaturePaths, nil
+	}
+
+	switch args[2] {
+	case "data":
+		return dataFeaturePaths, nil
+	case "domain":
+		return domainFeaturePaths, nil
+	case "presentation":
+		return presentationFeaturePaths, nil
+	default:
+		return nil, fmt.Errorf("未知模块类型: %s", args[2])
+	}
 }
 
 var dataFeaturePaths = []string{

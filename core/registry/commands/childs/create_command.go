@@ -26,6 +26,8 @@ func runCreateCommand(args []string) error {
 		return createFeature(args)
 	case "-model":
 		return createModel(args)
+	case "-flow":
+		return createFlow(args)
 	default:
 		return fmt.Errorf("未知命令类型: %s", args[0])
 	}
@@ -72,6 +74,27 @@ func createModel(args []string) error {
 	}
 
 	return utils.CreateDomainModel(modelPath, modelName, modelClassName)
+}
+
+func createFlow(args []string) error {
+	if len(args) < 4 {
+		return fmt.Errorf("缺少参数，示例: create -flow query featureName prefix [submodule]")
+	}
+
+	flowType := args[1]
+	featureName := args[2]
+	prefix := args[3]
+	submodule := ""
+	if len(args) > 4 {
+		submodule = args[4]
+	}
+
+	return utils.CreateDataFlow(utils.DataFlowOptions{
+		FeatureName: featureName,
+		Prefix:      prefix,
+		Submodule:   submodule,
+		FlowType:    flowType,
+	})
 }
 
 func resolveFeaturePaths(args []string) ([]string, error) {

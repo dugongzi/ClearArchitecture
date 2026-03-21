@@ -24,3 +24,29 @@ func toSnakeCase(value string) string {
 
 	return strings.ToLower(builder.String())
 }
+
+func SnakeToPascal(value string) string {
+	if value == "" {
+		return value
+	}
+
+	parts := strings.Split(value, "_")
+	var builder strings.Builder
+	for _, part := range parts {
+		part = strings.TrimSpace(part)
+		if part == "" {
+			continue
+		}
+		builder.WriteString(UpperFirst(strings.ToLower(part)))
+	}
+
+	return builder.String()
+}
+
+func LowerCamel(value string) string {
+	if value == "" {
+		return value
+	}
+
+	return strings.ToLower(value[:1]) + value[1:]
+}

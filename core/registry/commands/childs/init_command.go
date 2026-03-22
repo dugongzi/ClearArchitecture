@@ -12,7 +12,15 @@ func InitCommand() model.Command {
 	return model.Command{
 		Name:        "init",
 		Description: "初始化清晰架构",
-		Run:         runInitCommand,
+		Usage: []string{
+			"init",
+			"init <targetPath>",
+		},
+		Examples: []string{
+			"init",
+			"init ./demo_project",
+		},
+		Run: runInitCommand,
 	}
 }
 

@@ -12,7 +12,20 @@ func CreateCommand() model.Command {
 	return model.Command{
 		Name:        "create",
 		Description: "创建清晰架构模块",
-		Run:         runCreateCommand,
+		Usage: []string{
+			"create -feature <featureName> [data|domain|presentation]",
+			"create -model <featureName> <modelName> [-sync]",
+			"create -flow <query|mutation> <featureName> <prefix> [submodule]",
+		},
+		Examples: []string{
+			"create -feature user",
+			"create -feature user data",
+			"create -model user profile",
+			"create -model user profile -sync",
+			"create -flow query user getUser",
+			"create -flow mutation user updateUser account",
+		},
+		Run: runCreateCommand,
 	}
 }
 
